@@ -12,7 +12,7 @@ export default function Dashboard() {
 
   const fetchNotes = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/notes", {
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/notes`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNotes(res.data);
@@ -25,7 +25,7 @@ export default function Dashboard() {
     e.preventDefault();
     try {
       await axios.post(
-        "http://localhost:5000/api/notes",
+        `${process.env.REACT_APP_API_URL}/api/notes`,
         { title, description },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -39,7 +39,7 @@ export default function Dashboard() {
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:5000/api/notes/${id}`, {
+    await axios.delete(`${process.env.REACT_APP_API_URL}/api/notes${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     fetchNotes();
